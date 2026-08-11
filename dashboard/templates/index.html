@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    
+
+<title>
+Security Log Analyzer
+</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<h1>
+Security Dashboard
+</h1>
+
+<form method="GET">
+
+    <input 
+    type="text"
+    name="search"
+    placeholder="Search IP, user, or event"
+    value="{{ search }}"
+    >
+    
+    
+    <button type="submit">
+    Search
+    </button>
+    
+    
+    </form>
+
+<div class="card-container">
+
+
+    <div class="card">
+    
+    <h2>
+    Events
+    </h2>
+    
+    <p>
+    {{ total_events }}
+    </p>
+    
+    </div>
+    
+    
+    <div class="card">
+    
+    <h2>
+    Alerts
+    </h2>
+    
+    <p>
+    {{ total_alerts }}
+    </p>
+    
+    </div>
+    
+    
+    </div>
+
+
+
+<h2>
+Recent Security Alerts</h2>
+
+
+{% for alert in alerts %}
+
+<div class="alert-card">
+
+<h3>
+Severity:
+<span class="{{ alert['severity'].lower() }}">
+{{ alert["severity"] }}
+</span>
+</h3>
+
+
+<p>
+
+<b>Threat:</b>
+{{ alert["threat_type"] }}
+
+<br>
+
+<b>IP Address:</b>
+{{ alert["ip"] }}
+
+<br>
+
+<b>Details:</b>
+{{ alert["details"] }}
+
+</p>
+
+
+</div>
+
+
+{% endfor %}
+
+    <table border="1">
+    
+    <tr>
+    
+    <th>
+    Timestamp
+    </th>
+    
+    <th>
+    Event
+    </th>
+    
+    <th>
+    User
+    </th>
+    
+    <th>
+    IP Address
+    </th>
+    
+    </tr>
+    
+    
+    {% for event in events %}
+    
+    <tr>
+    
+    <td>
+    {{ event["timestamp"] }}
+    </td>
+    
+    
+    <td>
+    {{ event["event"] }}
+    </td>
+    
+    
+    <td>
+    {{ event["user"] }}
+    </td>
+    
+    
+    <td>
+    {{ event["ip"] }}
+    </td>
+    
+    
+    </tr>
+    
+    {% endfor %}
+    
+    
+    
+    <h2>
+        Recent Events
+        </h2>
+        
+        
+        <table border="1">
+        
+        <tr>
+        
+        <th>
+        Timestamp
+        </th>
+        
+        <th>
+        Event
+        </th>
+        
+        <th>
+        User
+        </th>
+        
+        <th>
+        IP Address
+        </th>
+        
+        </tr>
+        
+        
+        {% for event in events %}
+        
+        <tr>
+        
+        <td>
+        {{ event["timestamp"] }}
+        </td>
+        
+        
+        <td>
+        {{ event["event"] }}
+        </td>
+        
+        
+        <td>
+        {{ event["user"] }}
+        </td>
+        
+        
+        <td>
+        {{ event["ip"] }}
+        </td>
+        
+        
+        </tr>
+        
+        {% endfor %}
+        
+    </table>
+        
+    
+</body>
+
+
+        
+        
+
+</html>
